@@ -5,3 +5,4 @@ agregar como colaboradores a los siguientes usuarios:
 -	mjzaldana.
 -	DiegoIraheta00041923
 Listo :)
+(Nota: En los archivos encontraran comentarios útiles)
