@@ -1,4 +1,31 @@
-package com.example.lvluptemplate.data.entities
+package com.example.lvluptemplate.data.local.entities
 
-class SongEntity {
-}
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
+import androidx.room.PrimaryKey
+
+@Entity(
+    tableName = "songs",
+    foreignKeys = [
+        ForeignKey(
+            entity = GenreEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["genreId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ],
+    indices = [
+        Index(value = ["genreId"])
+    ]
+)
+data class SongEntity(
+    @PrimaryKey
+    val id: String,
+    val title: String,
+    val artist: String,
+    val album: String,
+    val coverUrl: String,
+    val genreId: String,
+    val playCount: Int = 0
+)
