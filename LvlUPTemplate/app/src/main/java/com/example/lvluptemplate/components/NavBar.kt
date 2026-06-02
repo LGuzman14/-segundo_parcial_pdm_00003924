@@ -4,7 +4,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -50,17 +49,10 @@ fun SimpleBottomBar() {
             route = Routes.PLAYLISTS,
             icon = Icons.Default.List,
             description = "Playlists"
-        ),
-        BottomNavItem(
-            route = Routes.EXPERIENCE,
-            icon = Icons.Default.Star,
-            description = "LvlUP Experience"
         )
     )
 
-    NavigationBar(
-        containerColor = Color(0xFF0F0F0F)
-    ) {
+    NavigationBar(containerColor = Color(0xFF0F0F0F)) {
         items.forEach { item ->
             NavigationBarItem(
                 selected = isSelectedRoute(
@@ -72,7 +64,6 @@ fun SimpleBottomBar() {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
-
                         launchSingleTop = true
                         restoreState = true
                     }

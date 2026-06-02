@@ -36,7 +36,7 @@ object DummyData {
             description = "Música relajada, melancólica y nocturna"
         )
     )
-
+//canciones bellakitas
     val allSongs = listOf(
         SongEntity(
             id = "s1",
@@ -158,6 +158,7 @@ object DummyData {
             coverUrl = "https://i.scdn.co/image/ab67616d0000b27390af5246adcaa93acb721c17",
             genreId = "g2"
         ),
+    //Cancion muy bellaca "la amo"
         SongEntity(
             id = "s16",
             title = "KOKO",

@@ -1,19 +1,19 @@
 package com.example.lvluptemplate.components
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -23,56 +23,77 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 
 @Composable
-fun TrackRowItem(title: String) {
-    val context  = LocalContext.current
+fun TrackRowItem(
+    title: String,
+    artist: String = "",
+    coverUrl: String = "",
+    onClick: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp)
-            .clickable{ Toast.makeText(context,"Reproduciendo",Toast.LENGTH_SHORT).show()},
+            .clip(RoundedCornerShape(12.dp))
+            .clickable { onClick() }
+            .padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Box(
                 modifier = Modifier
-                    .size(45.dp)
-                    .clip(RoundedCornerShape(4.dp))
+                    .size(48.dp)
+                    .clip(RoundedCornerShape(8.dp))
                     .background(Color(0xFF232732)),
                 contentAlignment = Alignment.Center
             ) {
-                AsyncImage(
-                    //Cambiar model por las imagenes de las canciones
-                    model = "https://i.scdn.co/image/ab67616d0000b27390af5246adcaa93acb721c17",
-                    contentDescription = "Cover de portada",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.matchParentSize()
-                )
+                if (coverUrl.isNotBlank()) {
+                    AsyncImage(
+                        model = coverUrl,
+                        contentDescription = "Cover de $title",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Text(
-                text = title,
-                color = Color(0xFF7E49C3),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
-            )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    color = Color(0xFF9B5DE5),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                if (artist.isNotBlank()) {
+                    Text(
+                        text = artist,
+                        color = Color.Gray,
+                        fontSize = 13.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
         }
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Default.MoreVert,
-                contentDescription = "Track options",
-                tint = Color.Gray
-            )
-        }
+        Icon(
+            imageVector = Icons.Default.MoreVert,
+            contentDescription = "Opciones",
+            tint = Color.Gray
+        )
     }
 }

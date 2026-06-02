@@ -14,11 +14,7 @@ object Routes {
     const val PLAYLIST_ID_ARG = "playlistId"
     const val PLAYLIST_DETAIL_WITH_ARGS = "$PLAYLIST_DETAIL/{$PLAYLIST_ID_ARG}"
 
-    fun songDetail(songId: Int): String {
-        return "$SONG_DETAIL/$songId"
-    }
+    fun songDetail(songId: String): String = "$SONG_DETAIL/$songId"
 
-    fun playlistDetail(playlistId: Int): String {
-        return "$PLAYLIST_DETAIL/$playlistId"
-    }
+    fun playlistDetail(playlistId: String): String = "$PLAYLIST_DETAIL/$playlistId"
 }
